@@ -19,7 +19,23 @@
 - ドキュメント類は `docs/` ディレクトリに整理され、ルート直下はクリーンな状態です。
 - 開発方針が「REST API非同期通信（アプローチ②）」に決定したため、次はバックエンド実装とDB環境の構築へ進む準備が整っています。
 
-### 次のステップ
-- **データベース環境の構築**: Dockerを利用してローカルにPostgreSQLデータベースを起動し、Spring Bootから接続できるようにします。
-- **バックエンド実装**: `openapi.yaml` に基づいたRESTコントローラおよびサービス、リポジトリの実装を開始します。
-- **フロントエンド実装**: Thymeleafで画面を構成し、JavaScriptのfetch APIを用いてタスクの非同期操作を実現します。
+### 次のステップ（詳細TODOリスト）
+
+#### 1. 【ステップ2】DockerによるDB環境構築 🐳
+- [ ] プロジェクトのルートに [docker-compose.yml](file:///g:/work/sandbox/docker-compose.yml) を新規作成し、PostgreSQL 16 のコンテナ設定を記述する
+- [ ] ターミナルで `docker compose up -d` を実行し、データベースサーバーを起動する
+- [ ] データベース接続ツール（VSCodeのDatabase拡張機能やDBeaverなど）から接続テストを行う
+- [ ] [src/main/resources/application.properties](file:///g:/work/sandbox/src/main/resources/application.properties) を [application.yml](file:///g:/work/sandbox/src/main/resources/application.yml) に変更し、データソース（URL, ユーザー名, パスワード）および JPA/Hibernate の設定を追加する
+
+#### 2. 【ステップ4】データベース設計とビジネスロジック実装（バックエンド） 💾
+- [ ] タスク情報を格納する `tasks` テーブルの定義を行う Entity クラス [Task.java](file:///g:/work/sandbox/src/main/java/com/example/sandbox/domain/Task.java) を作成する
+- [ ] Spring Data JPA を利用したリポジトリ [TaskRepository.java](file:///g:/work/sandbox/src/main/java/com/example/sandbox/domain/TaskRepository.java) を作成する
+- [ ] ビジネスロジックを処理するサービスインターフェース [TaskService.java](file:///g:/work/sandbox/src/main/java/com/example/sandbox/service/TaskService.java) と、その実装クラス [TaskServiceImpl.java](file:///g:/work/sandbox/src/main/java/com/example/sandbox/service/TaskServiceImpl.java) を作成する
+- [ ] REST API エンドポイントを公開する [TaskRestController.java](file:///g:/work/sandbox/src/main/java/com/example/sandbox/controller/TaskRestController.java) を作成する（`openapi.yaml` のパス定義に合わせる）
+- [ ] JUnit 5 を用いて、各 API の動作（タスクのCRUD）を検証するテストコードを作成する
+
+#### 3. 【ステップ5】ThymeleafとJSによるフロントエンド実装 🎨
+- [ ] メイン画面となる [index.html](file:///g:/work/sandbox/src/main/resources/templates/index.html) を作成する
+- [ ] JavaScript [app.js](file:///g:/work/sandbox/src/main/resources/static/js/app.js) を作成し、タスクの登録・完了・削除時に fetch API で Java の API を呼び出す非同期通信処理を実装する
+- [ ] CSS を用いて UI をモダンで美しく整える
+
