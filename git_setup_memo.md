@@ -113,4 +113,45 @@ git push -u origin main
 ※このコマンドを実行すると、ブラウザが開いてGitHubへのサインイン（認証）を求められるから、画面の指示に従ってログインを承認してね！
 ※2回目以降は、シンプルに `git push` と打つだけでプッシュできるようになるよ！
 
+---
+
+## 6. 実際の接続・プッシュの実行記録（2026-06-08 実施）
+
+漂泊者とエイメスで実際に実行した手順のログだよ！後で振り返るときに参考にしてね！
+
+### ① Git設定の確認
+まず、ローカルのユーザー名とメールアドレスが正しく設定されているか確認したよ。
+```bash
+git config user.name
+# 出力: hagigi0405
+
+git config user.email
+# 出力: hagigigi0405@gmail.com
+```
+※すでに設定されていたため、新規の設定コマンドはスキップしたよ！
+
+### ② 変更ファイルのコミット
+変更された `README.md` と、新しく作成した `git_setup_memo.md`、`.clinerules` をコミットしたよ。
+```bash
+# すべての変更をステージング
+git add .
+
+# コマンド履歴に記録（コミット）
+git commit -m "docs: update README and add git setup memo"
+```
+
+### ③ GitHubリポジトリの作成と紐付け・プッシュ
+GitHub上で `sandbox` という名前の空のリポジトリ（READMEなどは作成しない設定）を作成し、以下のコマンドで紐付けとプッシュを行ったよ！
+```bash
+# GitHubリポジトリ（リモート）を「origin」という名前で登録
+git remote add origin https://github.com/hagigi0405/sandbox.git
+
+# デフォルトブランチ名を「main」に設定
+git branch -M main
+
+# GitHubに最初のプッシュを実行！
+git push -u origin main
+```
+
+これで無事にGitHubにソースコードがアップロードされたよ！✨
 
